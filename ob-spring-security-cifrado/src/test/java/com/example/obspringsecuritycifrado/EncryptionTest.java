@@ -45,8 +45,8 @@ public class EncryptionTest {
     /**
      * Esto es lo que hace Spring para poder cambiar de passwordEncoder en el caso que alguno se rompa
      */
+    @Test
     void springPasswordEncoders() {
-        String idForEncode = "bcrypt";
         Map<String, PasswordEncoder> encoders = new HashMap<>();
         encoders.put("bcrypt", new BCryptPasswordEncoder());
         /*
@@ -56,6 +56,9 @@ public class EncryptionTest {
         */
 
         PasswordEncoder passwordEncoder = new DelegatingPasswordEncoder("bcrypt", encoders);
+
+        String hashedPassword = passwordEncoder.encode("admin");
+        System.out.println(hashedPassword);
     }
 
     /*
